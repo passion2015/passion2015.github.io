@@ -1,1 +1,19 @@
-theme: jekyll-theme-cayman
+markdown: redcarpet
+highlighter: pygments
+permalink: /:categories/:year/:month/:day/:title 
+excerpt_separator:  '<!-- more -->'
+
+url:
+baseurl: http://tegabyte.com
+
+redcarpet:
+  extensions: [fenced_code_block, strikethrough, tables]
+
+sass:
+  sass_dir: public/css
+  style: :compressed
+  
+comments :
+    provider : duoshuo
+    duoshuo : 
+      short_name : tegabyte

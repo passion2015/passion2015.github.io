@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta name="google-site-verification" content="uiR85fIbXMk5vlEZhh86jwwmm9B-vT7ICwPU_93CSw0" />
+	<meta name="baidu-site-verification" content="czynbWIX2Z" />
+    {% include head.html %}
+  </head>
+  <body style="background-color: darkslategray;">
+    <div class="container azul" id="divid_main" style="background-color: whitesmoke; background-image: url(http://tegabyte.qiniudn.com/bg-canvas_bg.jpg)">
+      <header class="top row gutters{% if page.title == "Home" %} fadeInLeft animated{% endif %}">
+        <div class="col span_2 center">
+          <!-- TODO: add baseurl to the logo link -->
+          <a href="{{ site.url }}" id="logo" title="{{ site.data.brume.name }}"
+             style="background-image: url({{site.baseurl}}/public/images/logo.png);"></a>
+        </div>
+        {% include navigation.html %}
+      </header>
+
+      {{ content }}
+
+      <footer>
+        <p>
+          <a rel="license" href="http://tegabyte.com">TegaByte</a> &copy 2014-2015. Proudly powered by <a href="https://github.com/" target="_blank">Github</a> and <a href="http://jekyllrb.com/" target="_blank">Jekyll</a>.
+        </p>
+      </footer>
+    </div>
+
+    <div id="back-top">
+      <a href="#top" title="回到顶部"></a>
+    </div>
+	
+	<div id="google_translate_element"></div>
+
+    <!-- scripts -->
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{{site.baseurl}}/public/js/jquery.fitvids.js"></script>
+    <script>
+      $("#back-top").hide();
+      $(document).ready(function(){
+        $("article").fitVids();
+
+        $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+            $('#back-top').fadeIn();
+          } else {
+            $('#back-top').fadeOut();
+          }
+        });
+        $('#back-top a').click(function () {
+          $('body,html').animate({
+            scrollTop: 0
+          }, 800);
+          return false;
+        });
+      });
+    </script>
+	<!--<script type="text/javascript">
+	function googleTranslateElementInit() {
+	  new google.translate.TranslateElement({pageLanguage: 'zh-CN', includedLanguages: 'en,zh-TW', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+	}
+	</script>
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">-->
+	</script>
+  </body>
+</html>

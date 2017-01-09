@@ -1,0 +1,11 @@
+- url: /
+  title: 首页
+
+- url: /classify
+  title: 分类
+  
+- url: /hot-topic
+  title: 热点
+  
+- url: /about
+  title: 关于

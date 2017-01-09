@@ -1,37 +1,42 @@
-## Welcome to GitHub Pages
+# brume
 
-You can use the [editor on GitHub](https://github.com/passion2015/passion2015.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+I am not a designer so I cannot impress you with breathtaking Jekyll themes, but brume is something that just came to my mind and I had to build it. It is a clean and simple theme, which has an index page that lists all your blog posts divided by year and an about page. brume uses redcarpet as the Markdown processor with strikethrough extension enabled by default (so you can use ~~ to strike out words).
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This is how the "Home" page looks like.
 
-### Markdown
+![Home](https://dl.dropboxusercontent.com/u/9924988/Screen%20Shot%202014-02-26%20at%2018.48.57.png)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+And this is a single post.
 
-```markdown
-Syntax highlighted code block
+![Home](https://dl.dropboxusercontent.com/u/9924988/Screen%20Shot%202014-04-06%20at%2012.56.08.png)
 
-# Header 1
-## Header 2
-### Header 3
+## Usage
 
-- Bulleted
-- List
+**Important:** The latest version of brume uses `site.baseurl` for links, therefore, if you want to put your site in a subdirectory, update the *_config.yml* file!
 
-1. Numbered
-2. List
+- Download the ZIP file and extract it's contents.
+- Open *_config.yml* file and enter your site's URL and add additional configuration or update the existing one if needed.
+- Open *_data/brume.yml* file and fill in values for site name (site title), author (your name) and description (blog description). This file contains all the custom information about your page. You can access it using `site.data.brume` object.
+- Open *about/index.md* file and add information about you or your site. You can delete this file and directory if not needed.
+- Open *_data/links.yml* and add additional links or update the existing ones that you want to be displayed in the navigation menu.
+- If you don't want to use CC BY-NC 4.0 licence for the content, then you should change the footer text, which is located in *_layouts/default.html*.
+- Generate your site and be happy!
 
-**Bold** and _Italic_ and `Code` text
+### Jekyll < 2.0.0
 
-[Link](url) and ![Image](src)
-```
+I try to keep brume up to date with the newest Jekyll version. Jekyll 2.0.0 introduced a lot of changes (like a built in Sass support) that are not backward compatible, therefore I have created a separate branch `legacy` for those, who might be using an older Jekyll version. All the changes that I introduce in `master` will be ported to `legacy`.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Theme customization
 
-### Jekyll Themes
+This theme has 4 predefined colors that can be used for links:
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/passion2015/passion2015.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+- azul
+- ruby
+- amber
+- avocado
 
-### Support or Contact
+![Color Examples](https://dl.dropboxusercontent.com/u/9924988/colors_new.png)
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+By default it uses *azure*, but if you want to select another one just change the second class of `container` div in *_layouts/default.html* to one of the provided names.
+
+Express your thoughts about brume on Twitter [@aigarsdz](http://twitter.com/aigarsdz), and help me make it better!

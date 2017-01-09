@@ -1,0 +1,41 @@
+---
+layout: default
+---
+
+
+<article class="single row gutters">
+  <h2 name="top">{{ page.title }}</h2>
+  <p>
+	<span><img src="http://tegabyte.qiniudn.com/calendar_alt_stroke.png" width="15px" height="15px" style="margin-bottom: -1px;"/>&nbsp;{{page.date | date: "%Y-%m-%d"}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<span><img src="http://tegabyte.qiniudn.com/author.png" width="15px" height="15px" style="margin-bottom: 0px;"/>&nbsp;{{page.author}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<span><img src="http://tegabyte.qiniudn.com/category.png" width="15px" height="15px" style="margin-bottom: -1px;"/>&nbsp;{{page.categories}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<!--<span><img src="http://tegabyte.qiniudn.com/tags.png" width="15px" height="15px" style="margin-bottom: 0px;"/>&nbsp;{{page.tags}}</span>-->
+  </p>
+	
+  {{ content }}
+  
+  <hr>
+  <div class="copyright">
+	<p><strong>本文固定链接：</strong><a href='{{page.url}}'>{{page.title}}</a></p>
+	<p><strong>版权声明：</strong>自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">创意共享3.0许可证</a>）</p>
+  </div>
+  
+  <!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="{{ page.id }}" data-title="{{ page.title }}" data-url="{{ site.baseurl }}{{ page.url }}"></div>
+  <!-- 多说评论框 end -->
+</article>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"tegabyte"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	
+</script>
+<!-- 多说公共JS代码 end -->
