@@ -1,102 +1,22 @@
 ---
 layout: post
-title:  "前端如何写一个精确的倒计时"
-categories: JavaScript
-tags:  countdown JavaScript
-author: HyG
+title:  "终于搭建好了blog"
+categories: 感悟
+tags:  软件工程
+author: shawngu
 ---
 
 * content
 {:toc}
 
-关于写倒计时大家可能都都比较熟悉，使用 setTimeout 或 setInterval 就可以搞定。几秒钟或者几分钟的倒计时这样写没有问题，但是如果是长时间的倒计时，这样写就会不准确。如果用户修改了他的设备时间，这样的倒计时就没有意义了。今天就说说写一个精确的倒计时的方法。
-
-![](https://img.alicdn.com/tfs/TB18QnlOpXXXXcVXpXXXXXXXXXX-388-256.png)
+非常开心，终于利用github搭建好了一个新的blog！为什么突然想搭建一个blog呢，也是前段时间反思自己这些年离技术越来越远了，从10年开始我并没有很好的沉下来写过大段的代码；特别是在刚刚过去的2年里，我花了太多的时间在团队建设上了，把一个只有4个人的团队拉扯到12个人，也背后确实付出了非常大的努力，当然也有很大的技术外的收获，最大的收获就是让我成功从单纯技术人员转型成为一个管理者了；但是内心还是能感觉到自己离成为一个优秀的程序员差距还很大，还是很想有这样的安静的大块时间去用代码实现一些想法，不管这个想法是公司安排的需求任务还是自己发现有意思的事情。
 
 
+管理的事情和人打交道比较多，其中难免要碰到各种员工，合作方，领导等等，在下面的梯队骨干没有成长起来的时候，又要招聘和培养人，还要顶住业务，真的是费尽心思和体力；幸好，两年过去了同事们也慢慢成长起来了，项目和团队管理的事情也可以帮忙分担，我慢慢有一些时间释放出来，但最想做的事情还是回到代码中去，去重新找回其中较为纯粹的乐趣。相比起人来，只想要和机器静静的交流就行，也不会有太多的情绪起伏，并且时长能收获很多“梦想成真”成就感，所以希望在接下来的时间里，能重新回到代码，并通过此blog记录一些自己的实践。
 
-
-## 原理
-
-众所周知 setTimeout 或者 setInterval 调用的时候会有微小的误差。有人做了一个 [demo](https://bl.ocks.org/kenpenn/raw/92ebaa71696b4c4c3acd672b1bb3f49a/) 来观察这个现象并对其做了修正。短时间的误差倒也可以接受，但是作为一个长时间的倒计时，误差累计就会导致倒计时不准确。
-
-因此我们可以在获取剩余时间的时候，每次 new 一个设备时间，因为设备时间的流逝相对是准确的，并且如果设备打开了网络时间同步，也会解决这个问题。
-
-但是，如果用户修改了设备时间，那么整个倒计时就没有意义了，用户只要将设备时间修改为倒计时的 endTime 就可以轻易看到倒计时结束是页面的变化。因此一开始获取服务端时间就是很重要的。
-
-简单的说，一个简单的精确倒计时原理如下：
-
-- 初始化时请求一次服务器时间 serverTime，再 new 一个设备时间 deviceTime
-- deviceTime 与 serverTime 的差作为时间偏移修正
-- 每次递归时 new 一个系统时间，解决 setTimeout 不准确的问题
-
-## 代码
-
-获取剩余时间的代码如下：
-
-```js
-/**
- * 获取剩余时间
- * @param  {Number} endTime    截止时间
- * @param  {Number} deviceTime 设备时间
- * @param  {Number} serverTime 服务端时间
- * @return {Object}            剩余时间对象
- */
-let getRemainTime = (endTime, deviceTime, serverTime) => {
-    let t = endTime - Date.parse(new Date()) - serverTime + deviceTime
-    let seconds = Math.floor((t / 1000) % 60)
-    let minutes = Math.floor((t / 1000 / 60) % 60)
-    let hours = Math.floor((t / (1000 * 60 * 60)) % 24)
-    let days = Math.floor(t / (1000 * 60 * 60 * 24))
-    return {
-        'total': t,
-        'days': days,
-        'hours': hours,
-        'minutes': minutes,
-        'seconds': seconds
-    }
+```c
+int main() {
+    printf("hello, code!");
+	return 0;
 }
 ```
-
-<del>获取服务器时间可以使用 mtop 接口 `mtop.common.getTimestamp` </del>
-
-然后可以通过下面的方式来使用：
-
-```js
-// 获取服务端时间（获取服务端时间代码略）
-getServerTime((serverTime) => {
-
-    //设置定时器
-    let intervalTimer = setInterval(() => {
-
-        // 得到剩余时间
-        let remainTime = getRemainTime(endTime, deviceTime, serverTime)
-
-        // 倒计时到两个小时内
-        if (remainTime.total <= 7200000 && remainTime.total > 0) {
-            // do something
-
-        //倒计时结束
-        } else if (remainTime.total <= 0) {
-            clearInterval(intervalTimer);
-            // do something
-        }
-    }, 1000)
-})
-```
-
-这样的的写法也可以做到准确倒计时，同时也比较简洁。不需要隔段时间再去同步一次服务端时间。
-
-## 补充
-
-在写倒计时的时候遇到了一个坑这里记录一下。
-
-**千万别在倒计时结束的时候请求接口**。会让服务端瞬间 QPS 峰值达到非常高。
-
-![](https://img.alicdn.com/tfs/TB1LBzjOpXXXXcnXpXXXXXXXXXX-154-71.png)
-
-如果在倒计时结束的时候要使用新的数据渲染页面，正确的做法是：
-
-在倒计时结束前的一段时间里，先请求好数据，倒计时结束后，再渲染页面。
-
-关于倒计时，如果你有什么更好的解决方案，欢迎评论交流。
