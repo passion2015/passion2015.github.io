@@ -6,8 +6,8 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Passion2015
-brief-intro: Software Dev Engineer
+title: love coding
+brief-intro: 记录软件工程实践中的所思所想
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://passion2015.github.io" # the base hostname & protocol for your site
 
@@ -19,7 +19,6 @@ email: passion_2004@163.com
 weibo_username: i顾小平
 zhihu_username: shawngu
 linkedIn_username: shawngu
-dribbble_username:
 
 description_footer: 本站记录我的软件工程的一些实践！
 
